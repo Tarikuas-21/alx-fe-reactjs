@@ -10,3 +10,4 @@
        </div>
      );
    }
+export default Counter;
