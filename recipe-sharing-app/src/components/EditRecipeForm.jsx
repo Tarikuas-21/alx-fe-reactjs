@@ -23,7 +23,7 @@ const EditRecipeForm = ({ recipe }) => {
       <br />
       <textarea
         value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={(event) => setDescription(event.target.value)}
         required
       />
       <br />
