@@ -10,8 +10,8 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
       </nav>
-      <Routes>
-        <Route
+      <Router>
+        <Router
           path="/"
           element={
             <>
@@ -20,8 +20,8 @@ function App() {
             </>
           }
         />
-        <Route path="/recipes/:id" element={<RecipeDetails />} />
-      </Routes>
+        <Router path="/recipes/:id" element={<RecipeDetails />} />
+      </Router>
     </div>
   );
 }
