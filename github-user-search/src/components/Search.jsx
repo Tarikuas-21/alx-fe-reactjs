@@ -1,60 +1,42 @@
-import React, { useState } from 'react';
-import { fetchUserData } from '../services/githubService';
+import { useState } from 'react';
 
-const Search = () => {
+export default function Search({ onSearch }) {
   const [username, setUsername] = useState('');
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [location, setLocation] = useState('');
+  const [minRepos, setMinRepos] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(false);
-    setUser(null);
-
-    try {
-      const data = await fetchUserData(username);
-      setUser(data);
-    } catch (err) {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+    onSearch({ username, location, minRepos });
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: '2rem auto', textAlign: 'center' }}>
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="bg-white shadow-md rounded-lg p-6 max-w-2xl mx-auto space-y-4">
+      <h2 className="text-2xl font-semibold">Search GitHub Users</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <input
           type="text"
+          placeholder="Username"
+          className="input input-bordered w-full"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter GitHub username"
-          style={{ padding: '8px', width: '70%' }}
-          required
         />
-        <button type="submit" style={{ padding: '8px 16px', marginLeft: '10px' }}>
-          Search
-        </button>
-      </form>
-
-      {loading && <p>Loading...</p>}
-      {error && <p style={{ color: 'red' }}>Looks like we cant find the user</p>}
-
-      {user && (
-        <div style={{ marginTop: '2rem', border: '1px solid #ccc', padding: '1rem', borderRadius: '8px' }}>
-          <img src={user.avatar_url} alt={user.login} width="100" style={{ borderRadius: '50%' }} />
-          <h2>{user.name || user.login}</h2>
-          <p>
-            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-              Visit GitHub Profile
-            </a>
-          </p>
-        </div>
-      )}
-    </div>
+        <input
+          type="text"
+          placeholder="Location"
+          className="input input-bordered w-full"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Min Repos"
+          className="input input-bordered w-full"
+          value={minRepos}
+          onChange={(e) => setMinRepos(e.target.value)}
+        />
+      </div>
+      <button type="submit" className="btn btn-primary w-full md:w-auto">Search</button>
+    </form>
   );
-};
-
-export default Search;
+}
