@@ -1,9 +1,15 @@
-import axios from 'axios';
+// src/services/githubService.js
+export async function searchUsers({ username, location, minRepos }) {
+  let query = [];
 
-const BASE_URL = import.meta.env.VITE_APP_GITHUB_API_URL || 'https://api.github.com';
+  if (username) query.push(`${username} in:login`);
+  if (location) query.push(`location:${location}`);
+  if (minRepos) query.push(`repos:>=${minRepos}`);
 
-export const fetchUserData = async (username) => {
-  const response = await axios.get(`${BASE_URL}/users/${username}`);
-  return response.data;
-};
+  const searchQuery = query.join('+');
 
+  const response = await fetch(`https://api.github.com/search/users?q=${searchQuery}&per_page=30`);
+  const data = await response.json();
+
+  return data.items;
+}
