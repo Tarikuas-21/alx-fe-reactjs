@@ -8,7 +8,7 @@ export const useRecipeStore = create((set, get) => ({
   recommendations: [],
 
   // Core recipe actions
-  addRecipe: (newRecipe) =>
+  setRecipe: (newRecipe) =>
     set((state) => {
       const updatedRecipes = [...state.recipes, newRecipe];
       return {
