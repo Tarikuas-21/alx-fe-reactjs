@@ -6,9 +6,11 @@ export const useRecipeStore = create((set, get) => ({
   searchTerm: '',
   favorites: [],
   recommendations: [],
+   setRecipes: (recipes) => set({ recipes }),
+
 
   // Core recipe actions
-  setRecipe: (newRecipe) =>
+  addRecipe: (newRecipe) =>
     set((state) => {
       const updatedRecipes = [...state.recipes, newRecipe];
       return {
