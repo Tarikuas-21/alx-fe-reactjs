@@ -41,9 +41,9 @@ const RecipeDetail = () => {
             ))}
           </ul>
 
-          <h2 className="text-2xl font-semibold mb-2">inetructions</h2>
+          <h2 className="text-2xl font-semibold mb-2">instructions</h2>
           <ol className="list-decimal list-inside text-gray-700 space-y-2">
-            {recipe.inetructions.map((inetructions, index) => (
+            {recipe.instructions.map((steps, index) => (
               <li key={index}>{step}</li>
             ))}
           </ol>
