@@ -1,6 +1,6 @@
 import { useRecipeStore } from '../recipeStore';
 
-const FavoritesList = () => {
+const FavFavoritesListjsxoritesList = () => {
   const favorites = useRecipeStore((state) =>
     state.favorites.map((id) => state.recipes.find((r) => r.id === id))
   );
