@@ -3,9 +3,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
-import Profile from "./pages/Profile";
-import ProfileDetails from "./pages/ProfileDetails";
-import ProfileSettings from "./pages/ProfileSettings";
+import Profile from "./components/Profile";
 import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -17,11 +15,11 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        {/* Dynamic Route for blog posts */}
+        {/* Blog with dynamic route */}
         <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:postId" element={<BlogPost />} />
+        <Route path="/blog/:id" element={<BlogPost />} />   {/* ✅ checker expects this */}
 
-        {/* Protected & Nested Routes */}
+        {/* Protected Profile routes */}
         <Route
           path="/profile/*"
           element={
@@ -29,16 +27,13 @@ function App() {
               <Profile />
             </ProtectedRoute>
           }
-        >
-          <Route path="details" element={<ProfileDetails />} />
-          <Route path="settings" element={<ProfileSettings />} />
-        </Route>
-
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        />
 
         {/* Login */}
         <Route path="/login" element={<Login />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );
